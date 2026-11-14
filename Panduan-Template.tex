@@ -1,0 +1,153 @@
+%% ============================================================
+%%  PANDUAN PENGGUNAAN TEMPLATE TUGAS AKHIR ITS
+%%  Dokumen terpisah -- kompilasi: pdflatex Panduan-Template.tex
+%% ============================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+
+\definecolor{itsblue}{RGB}{0,103,172}
+\definecolor{kodebg}{RGB}{245,245,245}
+
+\lstset{
+  language=[LaTeX]TeX,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{kodebg},
+  frame=single,
+  rulecolor=\color{gray!50},
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  keywordstyle=\color{itsblue},
+  commentstyle=\color{gray}\itshape,
+}
+\newcommand{\cmd}[1]{\texttt{\textbackslash #1}}
+\newcommand{\file}[1]{\texttt{#1}}
+
+\title{\textbf{Panduan Penggunaan Template Tugas Akhir ITS}\\[2pt]
+\large Program Sarjana\\[2pt]
+\normalsize Berbasis kelas \texttt{TA-ITS.cls} (Departemen Matematika ITS)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%% ------------------------------------------------------------
+\section{Kompilasi}
+Template memakai \textbf{biblatex + Biber} (gaya APA), jadi urutan kompilasinya pdf\LaTeX{} $\rightarrow$ Biber $\rightarrow$ pdf\LaTeX{} $\times 2$. Cara paling mudah:
+\begin{lstlisting}
+latexmk -pdf TA.tex
+\end{lstlisting}
+Di Overleaf/TeXstudio/VS Code (LaTeX Workshop), pastikan alat bibliografi diset ke \textbf{Biber}, bukan BibTeX. Pada MiKTeX, paket yang belum ada (mis.\ \texttt{biblatex-apa}, \texttt{textgreek}) akan diunduh otomatis pada kompilasi pertama.
+
+%% ------------------------------------------------------------
+\section{Struktur Folder}
+\begin{longtable}{@{}p{5.2cm}p{9.8cm}@{}}
+\toprule
+\textbf{Berkas/folder} & \textbf{Isi} \\ \midrule
+\endhead
+\file{TA.tex} & File utama: preamble, \textbf{data TA}, dan urutan halaman. \\
+\file{Format/} & \file{TA-ITS.cls}, \file{picins.sty}, logo ITS, dan latar lembar pengesahan. Umumnya tidak perlu diubah. \\
+\file{Bagian\_Awal/} & \file{abstrak.tex}, \file{abstract.tex}, \file{katapengantar.tex}, \file{daftarsimbol.tex}. \\
+\file{Bab/Bab\_1/} \dots\ \file{Bab\_5/} & Isi bab. Bab panjang dipecah per subbab, mis.\ \file{2\_1\_Penelitian\_Terdahulu.tex}. \\
+\file{Bagian\_Akhir/} & \file{lampiran.tex}, \file{terimakasih.tex}, \file{biodata.tex}. \\
+\file{Gambar/} & Semua gambar, termasuk \file{foto.pdf} (foto penulis 4$\times$6). \\
+\file{Pustaka/daftarPustaka.bib} & Basis data referensi. \\
+\bottomrule
+\end{longtable}
+Folder \file{Format/} dan \file{Gambar/} sudah didaftarkan di \cmd{graphicspath}, sehingga gambar cukup dipanggil dengan nama berkasnya, mis.\ \verb|\includegraphics{grafik1}|.
+
+%% ------------------------------------------------------------
+\section{Mengisi Data Tugas Akhir}
+Semua data diisi di bagian \textsc{Data Tugas Akhir} pada \file{TA.tex}:
+\begin{lstlisting}
+\Judul{Judul Tugas Akhir}            \JudulEng{Title in English}
+\Nama{NAMA LENGKAP}                  % sampul
+\NamaKecil{Nama Lengkap}             % lembar lain
+\NRP{50022XXXXX}                     \KodeTA{SM234801}
+\ProgramStudi{Matematika}            \ProgramStudiEng{Mathematics}
+\Gelar{Sarjana Matematika}           \GelarEng{Bachelor of Mathematics}
+\Departemen{Matematika}              \Department{Mathematics}
+\Fakultas{Sains dan Analitika Data}{FSAD}
+\Faculty{Science and Data Analytics}
+\Bulan{Juli}  \Tahun{2026}           % bulan bhs. Inggris otomatis
+\TanggalDisetujui{16 Juli 2026}      \ApprovalDate{16 July 2026}
+\Pembimbing{Pembimbing 1}{Pembimbing 2}{}   % kosongkan bila tidak ada
+\NIPPembimbing{NIP 1}{NIP 2}{}
+\Penguji{Penguji 1}{Penguji 2}{Penguji 3}
+\NIPPenguji{NIP 1}{NIP 2}{NIP 3}
+\Kadep{...}  \NIPKadep{...}
+\Kaprodi{...}  \NIPKaprodi{...}      % untuk lembar pengesahan proposal
+\end{lstlisting}
+Bila \cmd{Pembimbing} kedua diisi, sampul, lembar pengesahan, pernyataan orisinalitas, dan abstrak otomatis menampilkan dua pembimbing.
+
+%% ------------------------------------------------------------
+\section{Urutan Halaman}
+\begin{longtable}{@{}p{5.2cm}p{9.8cm}@{}}
+\toprule
+\textbf{Perintah} & \textbf{Halaman} \\ \midrule
+\endhead
+\cmd{Cover} & Sampul luar berwarna biru ITS. \\
+\cmd{LembarJudul}, \cmd{TitlePage} & Halaman judul bahasa Indonesia dan Inggris. \\
+\cmd{LembarPengesahan}, \cmd{LembarPengesahanEng} & Lembar pengesahan (laporan akhir). \\
+\cmd{LembarPengesahanProposal} & Lembar pengesahan untuk \textbf{proposal} TA (tanda tangan pembimbing dan Kaprodi). \\
+\cmd{LembarOrisinalitas}, \cmd{LembarOrisinalitasEng} & Pernyataan orisinalitas. \\
+\cmd{LembarAbstrak\{file\}}, \cmd{LembarAbstract\{file\}} & Abstrak; kata kunci dengan \cmd{katakunci\{...\}} / \cmd{keywords\{...\}}. \\
+\cmd{KataPengantar\{file\}} & Kata pengantar; tempat dan tanda tangan otomatis. \\
+\cmd{DaftarIsi}, \cmd{DaftarGambar}, \cmd{DaftarTabel}, \cmd{DaftarSimbol\{file\}} & Daftar-daftar. \\
+\cmd{BagianInti} & Mulai penomoran angka Arab. \\
+\cmd{DaftarPustaka} & Daftar pustaka dari \file{Pustaka/daftarPustaka.bib}. \\
+\cmd{DaftarLampiran\{file\}} & Lampiran; tiap lampiran dibuka dengan \cmd{Lampiran\{Judul\}}. \\
+\cmd{UcapanTerimaKasih\{file\}} & Ucapan terima kasih (opsional). \\
+\cmd{Biodata\{foto\}} + \verb|\input{...biodata}| & Biodata penulis dengan foto. \\
+\bottomrule
+\end{longtable}
+
+%% ------------------------------------------------------------
+\section{Penulisan Isi}
+\subsection*{Teorema dan sejenisnya}
+Lingkungan yang tersedia: \texttt{definisi}, \texttt{teorema}, \texttt{lema}, \texttt{akibat}, \texttt{contoh}, \texttt{proposisi}, \texttt{catatan}, dan \texttt{proof} (``Bukti''). Sumber ditulis di argumen opsional:
+\begin{lstlisting}
+\begin{definisi}[\cite{penulis2015buku}]\label{def:metrik}
+  ...
+\end{definisi}
+Berdasarkan \autoref{def:metrik}, ...   % -> "Definisi 2.1"
+\end{lstlisting}
+
+\subsection*{Gambar dan tabel}
+Pada kelas ini nomor gambar/tabel sudah memuat kata ``Gambar''/``Tabel''. Karena itu rujuk dengan \cmd{ref}, \textbf{bukan} \cmd{autoref}:
+\begin{lstlisting}
+ditunjukkan pada \ref{fig:metodologi}.   % -> "Gambar 3.1"
+\end{lstlisting}
+Judul tabel ditulis \emph{sebelum} \texttt{tabular} (di atas tabel), judul gambar \emph{setelah} gambar.
+
+\subsection*{Algoritma}
+Gunakan \texttt{algorithm} + \texttt{algorithmic} (paket \texttt{algpseudocode}); lihat contoh di \file{Bab/Bab\_4/4\_2\_Simulasi\_Numerik.tex}.
+
+\subsection*{Sitasi}
+\begin{longtable}{@{}p{6cm}p{9cm}@{}}
+\toprule
+\textbf{Perintah} & \textbf{Hasil} \\ \midrule
+\verb|\parencite{kunci}| & (Penulis dan Kedua, 2015) \\
+\verb|\textcite{kunci}| & Penulis dan Kedua (2015) \\
+\verb|\citeauthorfullname{kunci}| & Nama lengkap penulis (dipakai di tabel penelitian terdahulu) \\
+\verb|\citeyear{kunci}| & 2015 \\
+\bottomrule
+\end{longtable}
+Lebih dari dua penulis otomatis ditulis ``dkk.''.
+
+\subsection*{Kode program}
+Gunakan \verb|\begin{lstlisting}[language=Python, style=mystyle]| \dots\ \verb|\end{lstlisting}|; contoh ada di \file{Bagian\_Akhir/lampiran.tex}.
+
+\end{document}

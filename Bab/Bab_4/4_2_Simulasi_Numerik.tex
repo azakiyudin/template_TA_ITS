@@ -1,0 +1,39 @@
+\section{Algoritma dan Simulasi}
+Langkah perhitungan dapat dituliskan sebagai algoritma, seperti pada \autoref{alg:contoh}.
+
+\begin{algorithm}
+  \caption{Contoh algoritma}\label{alg:contoh}
+  \begin{algorithmic}[1]
+    \Require $x_0\in\R$, toleransi $\varepsilon>0$
+    \Ensure Hampiran $x^*$
+    \State $k\gets 0$
+    \Repeat
+      \State $x_{k+1}\gets T(x_k)$
+      \State $k\gets k+1$
+    \Until{$|x_{k}-x_{k-1}|<\varepsilon$}
+    \State \Return $x_k$
+  \end{algorithmic}
+\end{algorithm}
+
+Hasil simulasi disajikan pada \ref{tab:hasil}. Judul tabel diletakkan di atas tabel, sedangkan judul gambar di bawah gambar.
+
+\begin{table}[H]
+  \centering
+  \caption{Contoh tabel hasil simulasi}
+  \label{tab:hasil}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Iterasi} & \textbf{$x_k$} & \textbf{Galat} \\ \hline
+    1 & 0,500 & 0,500 \\ \hline
+    2 & 0,750 & 0,250 \\ \hline
+    3 & 0,875 & 0,125 \\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.3\textwidth]{lambang-its}
+  \caption{Contoh gambar (sumber: dokumen pribadi)}
+  \label{fig:contoh}
+\end{figure}

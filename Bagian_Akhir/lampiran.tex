@@ -1,0 +1,30 @@
+\Lampiran{Contoh Tabel Lampiran}
+
+\noindent
+Tuliskan isi lampiran pertama di sini, misalnya tabel data lengkap.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{No} & \textbf{Data} & \textbf{Keterangan} \\ \hline
+    1 & \dots & \dots \\ \hline
+    2 & \dots & \dots \\ \hline
+  \end{tabular}
+\end{center}
+
+\Lampiran{Contoh Kode Program}
+
+\noindent
+Kode program dapat dituliskan menggunakan lingkungan \texttt{lstlisting}.
+
+\begin{lstlisting}[language=Python, style=mystyle]
+def iterasi(T, x0, tol=1e-6):
+    # Iterasi titik tetap sederhana
+    x = x0
+    while True:
+        x_baru = T(x)
+        if abs(x_baru - x) < tol:
+            return x_baru
+        x = x_baru
+\end{lstlisting}

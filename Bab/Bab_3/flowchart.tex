@@ -1,0 +1,18 @@
+\tikzstyle{startstop} = [ellipse, minimum width=5.5cm, minimum height=0.5cm, text centered, draw=black]
+\tikzstyle{process} = [rectangle, minimum height=0.5cm, text centered, text width=8.5cm, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\begin{tikzpicture}[node distance=1.3cm]
+\node (start) [startstop] {Mulai};
+\node (pro1) [process, below of=start] {Studi Literatur};
+\node (pro2) [process, below of=pro1] {Tahap Kedua};
+\node (pro3) [process, below of=pro2] {Tahap Ketiga};
+\node (pro4) [process, below of=pro3] {Penarikan Kesimpulan};
+\node (pro5) [process, below of=pro4] {Penulisan Tugas Akhir};
+\node (stop) [startstop, below of=pro5] {Selesai};
+\draw [arrow] (start) -- (pro1);
+\draw [arrow] (pro1) -- (pro2);
+\draw [arrow] (pro2) -- (pro3);
+\draw [arrow] (pro3) -- (pro4);
+\draw [arrow] (pro4) -- (pro5);
+\draw [arrow] (pro5) -- (stop);
+\end{tikzpicture}

@@ -1,0 +1,17 @@
+# File hasil kompilasi LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.lof
+*.lot
+*.toc
+*.out
+*.synctex.gz
+*.nlo
+*.nls
+*.ilg
+*.bcf
+*.run.xml

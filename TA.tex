@@ -1,0 +1,186 @@
+%% ============================================================
+%%  TEMPLATE TUGAS AKHIR ITS  (Program Sarjana)
+%%  Kelas TA-ITS.cls (Matematika ITS), disusun ulang dengan
+%%  struktur folder yang sama seperti template tesis.
+%%
+%%  File utama -- kompilasi file ini dengan pdfLaTeX + Biber:
+%%    latexmk -pdf TA.tex
+%%  Petunjuk lengkap: lihat Panduan-Template.tex / Panduan-Template.pdf
+%% ============================================================
+
+%% File kelas & paket template disimpan di folder Format/
+\makeatletter
+\def\input@path{{Format/}}
+\makeatother
+\documentclass{TA-ITS}
+
+\theoremstyle{definition}
+\newtheorem{definisi}{Definisi}[section]
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lema}{Lema}[section]
+\newtheorem{akibat}{Akibat}[section]
+\newtheorem{contoh}{Contoh}[section]
+\newtheorem{proposisi}{Proposisi}[section]
+\newtheorem{catatan}{Catatan}[section]
+\renewcommand{\proofname}{Bukti}
+
+\providecommand{\definisiautorefname}{Definisi}
+\providecommand{\proposisiautorefname}{Proposisi}
+\providecommand{\lemaautorefname}{Lema}
+\providecommand{\teoremaautorefname}{Teorema}
+\providecommand{\akibatautorefname}{Akibat}
+\providecommand{\contohautorefname}{Contoh}
+\providecommand{\catatanautorefname}{Catatan}
+\providecommand{\algorithmautorefname}{Algoritma}
+
+\setlength{\parindent}{0.75cm} % Indentasi 0.75cm pada tiap paragraf
+
+%% Nomor halaman: ganjil di kanan bawah, genap di kiri bawah
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhf{}
+\fancyfoot[R]{\ifthenelse{\isodd{\value{page}}}{\thepage}{}}
+\fancyfoot[L]{\ifthenelse{\isodd{\value{page}}}{}{\thepage}}
+
+\usepackage[labelsep=quad]{caption}
+\captionsetup[table]{skip=5pt}
+
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{physics}
+\usepackage{ragged2e}
+\usepackage[mathscr]{eucal}
+\usepackage[table]{xcolor}
+
+%% Penulisan kode program (lihat contoh di Bagian_Akhir/lampiran.tex)
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codeblack}{rgb}{0,0,0}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codeblack},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showstringspaces=false,
+    tabsize=2
+}
+
+%% Diagram alir (gaya didefinisikan di Bab/Bab_3/flowchart.tex)
+\usetikzlibrary{shapes.geometric,arrows}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+
+%% Tambahkan paket / perintah buatan sendiri di sini
+%% contoh: \newcommand{\Fix}{\operatorname{Fix}}
+
+\addbibresource{Pustaka/daftarPustaka.bib}
+
+\begin{document}
+
+%% ============================================================
+%%  DATA TUGAS AKHIR  (wajib diisi)
+%% ============================================================
+\Judul{Judul Tugas Akhir dalam Bahasa Indonesia}
+\JudulEng{Final Project Title in English}
+\Nama{NAMA LENGKAP MAHASISWA}                % sampul (otomatis kapital)
+\NamaKecil{Nama Lengkap Mahasiswa}           % lembar lain (huruf biasa)
+\NRP{50022XXXXX}
+\KodeTA{SM234801}                            % kode mata kuliah TA (sampul)
+
+\ProgramStudi{Matematika}                    % prodi (bhs. Indonesia)
+\ProgramStudiEng{Mathematics}                % prodi (bhs. Inggris)
+\Gelar{Sarjana Matematika}                   % gelar pada lembar pengesahan
+\GelarEng{Bachelor of Mathematics}
+\Departemen{Matematika}
+\Department{Mathematics}
+\BidangStudi{Analisis dan Aljabar}
+\Fakultas{Sains dan Analitika Data}{FSAD}    % Fakultas {nama}{singkatan}
+\Faculty{Science and Data Analytics}
+\SingkatanFakultas{FSAD}                     % dipakai di identitas abstrak
+\SingkatanFakultasEng{SCIENTICS}
+
+\Bulan{Juli}                                 % bulan pengesahan (bhs. Inggris otomatis)
+\Tahun{20XX}
+\TanggalDisetujui{DD Bulan 20XX}             % tanggal pada pernyataan orisinalitas
+\ApprovalDate{DD Month 20XX}                 % idem, versi bhs. Inggris
+
+\Pembimbing{Nama Pembimbing 1, gelar}        % Pembimbing 1
+{}                                           % Pembimbing 2 (kosongkan bila tidak ada)
+{}                                           % Pembimbing 3 (kosongkan bila tidak ada)
+
+\NIPPembimbing{XXXXXXXX XXXXXX X XXX}
+{}
+{}
+
+\Penguji{Nama Penguji 1, gelar}
+{Nama Penguji 2, gelar}
+{Nama Penguji 3, gelar}
+
+\NIPPenguji{XXXXXXXX XXXXXX X XXX}
+{XXXXXXXX XXXXXX X XXX}
+{XXXXXXXX XXXXXX X XXX}
+
+\Kadep{Nama Kepala Departemen, gelar}
+\NIPKadep{XXXXXXXX XXXXXX X XXX}
+\Kaprodi{Nama Kepala Program Studi, gelar}   % hanya dipakai \LembarPengesahanProposal
+\NIPKaprodi{XXXXXXXX XXXXXX X XXX}
+
+\allowdisplaybreaks
+
+%% ============================================================
+%%  BAGIAN AWAL
+%% ============================================================
+\Cover                 % sampul luar (biru ITS)
+\BagianAwal
+\LembarJudul           % halaman judul bahasa Indonesia
+\TitlePage             % halaman judul bahasa Inggris
+\LembarPengesahan
+\LembarPengesahanEng
+% \LembarPengesahanProposal  % pakai ini (ganti dua baris di atas) untuk proposal TA
+\LembarOrisinalitas
+\LembarOrisinalitasEng
+
+\LembarAbstrak{Bagian_Awal/abstrak}
+\LembarAbstract{Bagian_Awal/abstract}
+\KataPengantar{Bagian_Awal/katapengantar}
+
+\DaftarIsi\raggedbottom
+\DaftarGambar
+\DaftarTabel
+\DaftarSimbol{Bagian_Awal/daftarsimbol}
+
+%% ============================================================
+%%  BAGIAN INTI
+%% ============================================================
+\BagianInti
+
+\input{Bab/Bab_1/Bab1}
+\input{Bab/Bab_2/Bab2}
+\input{Bab/Bab_3/Bab3}
+\input{Bab/Bab_4/Bab4}
+\input{Bab/Bab_5/Bab5}
+
+\DaftarPustaka
+
+%% ============================================================
+%%  BAGIAN AKHIR
+%% ============================================================
+\DaftarLampiran{Bagian_Akhir/lampiran}
+\UcapanTerimaKasih{Bagian_Akhir/terimakasih}   % opsional
+\Biodata{foto}                                 % foto penulis 4x6 di Gambar/
+\input{Bagian_Akhir/biodata}
+
+\end{document}
